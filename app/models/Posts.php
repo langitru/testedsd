@@ -1,5 +1,7 @@
 <?php
-// include __DIR__ . '/../components/Extrasens.php';
+namespace Models;
+
+
 class Posts
 {
     public static function saveKwest1step()
@@ -38,7 +40,7 @@ class Posts
             } 
             else {
                 // BadResult
-            $_SESSION['veracity'][$extName] -= 1;
+                $_SESSION['veracity'][$extName] -= 1;
             }
         }
     }

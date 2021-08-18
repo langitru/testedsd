@@ -1,0 +1,14 @@
+{
+    "require": {
+        
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Components\\": "app/components/",
+			"Config\\": "config/",
+			"Controllers\\": "app/controllers/",
+            "Models\\": "app/models/"
+        }
+    }
+}
