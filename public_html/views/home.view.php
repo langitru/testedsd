@@ -166,9 +166,12 @@
                                 <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Число пользователя</th>
-                                <th scope="col">Mag_1</th>
-                                <th scope="col">Mag_2</th>
-                                <th scope="col">Mag_3</th>
+                                <th scope="col">Ext_1</th>
+                                <th scope="col">Ext_2</th>
+                                <th scope="col">Ext_3</th>
+                                <th scope="col">Ext_4</th>
+                                <th scope="col">Ext_5</th>
+                                <th scope="col">Ext_6</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -181,6 +184,15 @@
                                 <td><?= $kwest['Extrasens_1'];?></td>
                                 <td><?= $kwest['Extrasens_2'];?></td>
                                 <td><?= $kwest['Extrasens_3'];?></td>
+                                <? if ( $kwest['Extrasens_4'] ): ?>
+                                <td><?= $kwest['Extrasens_4'];?></td>
+                                <? endif; ?>
+                                <? if ( $kwest['Extrasens_5'] ): ?>
+                                <td><?= $kwest['Extrasens_5'];?></td>
+                                <? endif; ?>
+                                <? if ( $kwest['Extrasens_6'] ): ?>
+                                <td><?= $kwest['Extrasens_6'];?></td>
+                                <? endif; ?>
 
 
                                 </tr>
