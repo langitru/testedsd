@@ -1,4 +1,10 @@
 <?php
+namespace Components;
+
+
+use Models\Posts;
+
+
 class Extrasens
 {
     public $name;

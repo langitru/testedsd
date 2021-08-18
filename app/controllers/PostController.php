@@ -1,6 +1,9 @@
 <?php
-include __DIR__ . '/../components/Extrasens.php';
-include __DIR__ . '/../models/Posts.php';
+namespace Controllers;
+
+
+use Components\Extrasens;
+use Models\Posts;
 
 
 class PostController

@@ -1,7 +1,10 @@
 <?php
 if( !session_id() ) @session_start();
 
-include 'helpers/debag.php';
-include 'controllers/PostController.php';
+require '../vendor/autoload.php';
+
+use Controllers\PostController;
+//include 'helpers/debag.php';
+
 
 PostController::index();
