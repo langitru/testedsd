@@ -4,11 +4,21 @@ namespace Controllers;
 
 use Components\Extrasens;
 use Models\Posts;
+use League\Plates\Engine;
 
 
 class PostController
 {
-    static function index()
+    private $views;
+
+
+    function __construct()
+	{
+		$this->views = new Engine('../app/views');;
+	}
+
+
+    public function index()
     {
         if (isset($_POST['user_send_ok'])){
 
@@ -20,7 +30,6 @@ class PostController
             }
         }
 
-        
         if (isset($_POST['user_send_number']) && $_POST['user_number'] >= 10 && $_POST['user_number'] <= 99  ){
 
             if (isset($_SESSION['kwest'])){
@@ -31,11 +40,13 @@ class PostController
             {
                 Posts::saveKwestHistory();
             }
-            
         }
 
-        Posts::sessionDestroy();
+        if (isset($_POST['ses_detroy'])){
+            Posts::sessionDestroy();
+        }
+        
 
-        include __DIR__ . '/../views/home.view.php';
+        echo $this->views->render('index.post', [] );
     }
 }

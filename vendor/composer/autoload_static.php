@@ -11,6 +11,10 @@ class ComposerStaticInitbd6db4c5d4a9c28b7cad70c7d0669ce4
         array (
             'Models\\' => 7,
         ),
+        'L' => 
+        array (
+            'League\\Plates\\' => 14,
+        ),
         'C' => 
         array (
             'Controllers\\' => 12,
@@ -23,6 +27,10 @@ class ComposerStaticInitbd6db4c5d4a9c28b7cad70c7d0669ce4
         'Models\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app/models',
+        ),
+        'League\\Plates\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/plates/src',
         ),
         'Controllers\\' => 
         array (
