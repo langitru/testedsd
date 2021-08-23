@@ -11,7 +11,7 @@
                         
                             <form action="/" method="post">
 
-                            <? if ( !isset($_POST['user_send_ok']) && !isset($_SESSION['Error']) ): ?>
+                            <? if ( !isset($_POST['user_send_ok']) && !isset($Error) ): ?>
                                 <button name="user_send_ok" type="submit" class="mybtn_1 btn btn-primary">Ok</button>
                             <? else: ?>
                                 <div class="row g-2 justify-content-center">
@@ -29,12 +29,12 @@
 
                             </form>   
                                 
-                            <? if ( isset($_SESSION['kwest']) ): ?>
+                            <? if ( isset($kwest) ): ?>
                                 <div class="row">
                                 <div class="col-lg-4 mx-auto">
-                                <? if ( isset($_SESSION['Error']) ): ?>
+                                <? if ( isset($Error) ): ?>
                                     <div class="answer_extrasens alert alert-danger alert-dismissible fade show" role="alert">
-                                        <p><b><?= $_SESSION['Error']; ?></b></p> 
+                                        <p><b><?= $Error; ?></b></p> 
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -42,13 +42,12 @@
 
                                 <? else: ?> 
                                     <div class="answer_extrasens alert alert-success alert-dismissible fade show" role="alert">
-                                        <?php foreach($_SESSION['kwest'] as $key => $val): ?>
+                                        <?php foreach($kwest as $extrasensName => $extrasensNumber): ?>
 
-                                            <? if ( $key !== 'id' && $key !== 'userNumber' ): ?>
-                                                <p><b><?= $key; ?> : <?= $val; ?></b></p>   
+                                            <? if ( $extrasensName !== 'id' && $extrasensName !== 'userNumber' ): ?>
+                                                <p><b><?= $extrasensName; ?> : <?= $extrasensNumber; ?></b></p>   
                                             <? endif;?>
                                         
-                                            
                                         <?php endforeach;?>
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
@@ -69,7 +68,7 @@
 
             <section class="py-5 text-center container">
                 <div class="row py-lg-5">
-                <? if ( isset($_SESSION['veracity']) ): ?>
+                <? if ( isset($veracity) ): ?>
                     <div class="col-lg-5">
                         <table class="table">
                             <thead class="thead-dark">
@@ -79,13 +78,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($_SESSION['veracity'] as $key => $val ):?>
+                                <?php foreach($veracity as $extrasensName => $extrasensVeracity ):?>
                                     
                                 <tr>
+                                    <td><?= $extrasensName;?></td>
                                 
-                                    <td><?= $key;?></td>
-                                
-                                    <td><?= $val;?></td>
+                                    <td><?= $extrasensVeracity;?></td>
                                 </tr>
                                 <?php endforeach;?>
 
@@ -107,7 +105,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($_SESSION['history_kwests'] as $kwest):?>
+                                <?php foreach($history_kwests as $kwest):?>
                                 <tr>
                                 
                                 <td><?= $kwest['id'];?></td>

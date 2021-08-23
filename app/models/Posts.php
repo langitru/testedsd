@@ -1,6 +1,7 @@
 <?php
 namespace Models;
 
+use Components\Extrasens;
 
 class Posts
 {
@@ -12,6 +13,8 @@ class Posts
     
             $_SESSION['kwest']['id'] += $_SESSION['iteration'];
             $_SESSION['kwest']['userNumber'] = NULL;
+
+            Extrasens::askExrasens();
         }
     }
 

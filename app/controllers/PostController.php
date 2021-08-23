@@ -2,7 +2,7 @@
 namespace Controllers;
 
 
-use Components\Extrasens;
+
 use Components\Validate;
 use Models\Posts;
 use League\Plates\Engine;
@@ -23,14 +23,9 @@ class PostController
     {
         if (isset($_POST['user_send_ok']))
         {
-
-            if(!isset($_SESSION['kwest']))
-            {
-                Posts::saveKwest1step();
-        
-                Extrasens::askExrasens();
-            }
+            Posts::saveKwest1step();
         }
+
 
         if ( isset($_POST['user_send_number']) )
         {
@@ -55,10 +50,11 @@ class PostController
 
         Posts::sessionDestroy();
         
-        $data = [
+        // $data = [];
 
-        ];
+        $data = $_SESSION;
 
-        echo $this->views->render('index.post', $data );
+        // dd($data);
+        echo $this->views->render('index2.post', $data );
     }
 }
