@@ -55,7 +55,10 @@ class Posts
 
     public static function sessionDestroy()
     {
-        session_destroy();
-        header('Location: /');
+        if (isset($_POST['ses_detroy'])){
+            session_destroy();
+            header('Location: /');
+        }
+        
     }
 }

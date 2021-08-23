@@ -10,9 +10,8 @@
                         <div class="form">
                         
                             <form action="/" method="post">
-                                
-                            
-                            <? if ( !isset($_POST['user_send_ok']) ): ?>
+
+                            <? if ( !isset($_POST['user_send_ok']) && !isset($_SESSION['Error']) ): ?>
                                 <button name="user_send_ok" type="submit" class="mybtn_1 btn btn-primary">Ok</button>
                             <? else: ?>
                                 <div class="row g-2 justify-content-center">
@@ -29,24 +28,34 @@
                             <? endif;?>
 
                             </form>   
-                        
-                            
                                 
                             <? if ( isset($_SESSION['kwest']) ): ?>
                                 <div class="row">
                                 <div class="col-lg-4 mx-auto">
-                                <div class="answer_extrasens alert alert-success alert-dismissible fade show" role="alert">
-                                    <?php foreach($_SESSION['kwest'] as $key => $val): ?>
-                                        <? if ( $key !== 'id' && $key !== 'userNumber' ): ?>
-                                            <p><b><?= $key; ?> : <?= $val; ?></b></p>   
-                                        <? endif;?>
-                                    
+                                <? if ( isset($_SESSION['Error']) ): ?>
+                                    <div class="answer_extrasens alert alert-danger alert-dismissible fade show" role="alert">
+                                        <p><b><?= $_SESSION['Error']; ?></b></p> 
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                <? else: ?> 
+                                    <div class="answer_extrasens alert alert-success alert-dismissible fade show" role="alert">
+                                        <?php foreach($_SESSION['kwest'] as $key => $val): ?>
+
+                                            <? if ( $key !== 'id' && $key !== 'userNumber' ): ?>
+                                                <p><b><?= $key; ?> : <?= $val; ?></b></p>   
+                                            <? endif;?>
                                         
-                                    <?php endforeach;?>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
+                                            
+                                        <?php endforeach;?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                <? endif;?>
+                                
                                 </div>
                                 </div>
                             <? endif;?>
