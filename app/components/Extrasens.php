@@ -41,7 +41,7 @@ class Extrasens
         {
             $ext = new Extrasens($i);
             
-            Posts::saveKwest2step($ext);
+            Posts::saveQuest2step($ext);
         }
     }
 }

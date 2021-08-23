@@ -10,9 +10,8 @@
                         <div class="form">
                         
                             <form action="/" method="post">
-                                
-                            
-                            <? if ( !isset($_POST['user_send_ok']) ): ?>
+
+                            <? if ( !isset($_POST['user_send_ok']) && !isset($error) ): ?>
                                 <button name="user_send_ok" type="submit" class="mybtn_1 btn btn-primary">Ok</button>
                             <? else: ?>
                                 <div class="row g-2 justify-content-center">
@@ -29,24 +28,33 @@
                             <? endif;?>
 
                             </form>   
-                        
-                            
                                 
-                            <? if ( isset($_SESSION['kwest']) ): ?>
+                            <? if ( isset($quest) ): ?>
                                 <div class="row">
                                 <div class="col-lg-4 mx-auto">
-                                <div class="answer_extrasens alert alert-success alert-dismissible fade show" role="alert">
-                                    <?php foreach($_SESSION['kwest'] as $key => $val): ?>
-                                        <? if ( $key !== 'id' && $key !== 'userNumber' ): ?>
-                                            <p><b><?= $key; ?> : <?= $val; ?></b></p>   
-                                        <? endif;?>
-                                    
+                                <? if ( isset($error) ): ?>
+                                    <div class="answer_extrasens alert alert-danger alert-dismissible fade show" role="alert">
+                                        <p><b><?= $error; ?></b></p> 
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                <? else: ?> 
+                                    <div class="answer_extrasens alert alert-success alert-dismissible fade show" role="alert">
+                                        <?php foreach($quest as $extrasensName => $extrasensNumber): ?>
+
+                                            <? if ( $extrasensName !== 'id' && $extrasensName !== 'userNumber' ): ?>
+                                                <p><b><?= $extrasensName; ?> : <?= $extrasensNumber; ?></b></p>   
+                                            <? endif;?>
                                         
-                                    <?php endforeach;?>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
+                                        <?php endforeach;?>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                <? endif;?>
+                                
                                 </div>
                                 </div>
                             <? endif;?>
@@ -60,7 +68,7 @@
 
             <section class="py-5 text-center container">
                 <div class="row py-lg-5">
-                <? if ( isset($_SESSION['veracity']) ): ?>
+                <? if ( isset($veracity) ): ?>
                     <div class="col-lg-5">
                         <table class="table">
                             <thead class="thead-dark">
@@ -70,13 +78,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($_SESSION['veracity'] as $key => $val ):?>
+                                <?php foreach($veracity as $extrasensName => $extrasensVeracity ):?>
                                     
                                 <tr>
+                                    <td><?= $extrasensName;?></td>
                                 
-                                    <td><?= $key;?></td>
-                                
-                                    <td><?= $val;?></td>
+                                    <td><?= $extrasensVeracity;?></td>
                                 </tr>
                                 <?php endforeach;?>
 
@@ -98,23 +105,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($_SESSION['history_kwests'] as $kwest):?>
+                                <?php foreach($history_quests as $quest):?>
                                 <tr>
                                 
-                                <td><?= $kwest['id'];?></td>
-                                <td><?= $kwest['userNumber'];?></td>
+                                <td><?= $quest['id'];?></td>
+                                <td><?= $quest['userNumber'];?></td>
 
-                                <td><?= $kwest['Extrasens_1'];?></td>
-                                <td><?= $kwest['Extrasens_2'];?></td>
-                                <td><?= $kwest['Extrasens_3'];?></td>
-                                <? if ( $kwest['Extrasens_4'] ): ?>
-                                <td><?= $kwest['Extrasens_4'];?></td>
+                                <td><?= $quest['Extrasens_1'];?></td>
+                                <td><?= $quest['Extrasens_2'];?></td>
+                                <td><?= $quest['Extrasens_3'];?></td>
+                                <? if ( $quest['Extrasens_4'] ): ?>
+                                <td><?= $quest['Extrasens_4'];?></td>
                                 <? endif; ?>
-                                <? if ( $kwest['Extrasens_5'] ): ?>
-                                <td><?= $kwest['Extrasens_5'];?></td>
+                                <? if ( $quest['Extrasens_5'] ): ?>
+                                <td><?= $quest['Extrasens_5'];?></td>
                                 <? endif; ?>
-                                <? if ( $kwest['Extrasens_6'] ): ?>
-                                <td><?= $kwest['Extrasens_6'];?></td>
+                                <? if ( $quest['Extrasens_6'] ): ?>
+                                <td><?= $quest['Extrasens_6'];?></td>
                                 <? endif; ?>
 
 

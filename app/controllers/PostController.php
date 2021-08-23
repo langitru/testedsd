@@ -2,6 +2,8 @@
 namespace Controllers;
 
 
+
+use Components\Validate;
 use Components\Extrasens;
 use Models\Posts;
 use League\Plates\Engine;
@@ -20,33 +22,37 @@ class PostController
 
     public function index()
     {
-        if (isset($_POST['user_send_ok'])){
+        if (isset($_POST['user_send_ok']))
+        {
+            Posts::saveQuest1step();
+        }
 
-            if(!isset($_SESSION['kwest']))
+
+        if ( isset($_POST['user_send_number']) )
+        {
+            if ( Validate::sendUserNumber($_POST) )
             {
-                Posts::saveKwest1step();
-        
-                Extrasens::askExrasens();
-            }
-        }
 
-        if (isset($_POST['user_send_number']) && $_POST['user_number'] >= 10 && $_POST['user_number'] <= 99  ){
-
-            if (isset($_SESSION['kwest'])){
-                Posts::saveKwest3step();
-            }
-            
-            if ($_SESSION['kwest'] != NULL)
+                if (isset($_SESSION['quest'])){
+                    Posts::saveQuest3step();
+                }
+                
+                if ($_SESSION['quest'] != NULL)
+                {
+                    Posts::saveQuestHistory();
+                }
+            } 
+            else 
             {
-                Posts::saveKwestHistory();
+                $_SESSION['error'] = 'Ошибка! Введите 2-х значное число';
             }
         }
 
-        if (isset($_POST['ses_detroy'])){
-            Posts::sessionDestroy();
-        }
-        
 
-        echo $this->views->render('index.post', [] );
+        Posts::sessionDestroy();
+        
+        $data = $_SESSION;
+
+        echo $this->views->render('index.post', $data );
     }
 }
