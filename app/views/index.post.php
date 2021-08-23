@@ -11,7 +11,7 @@
                         
                             <form action="/" method="post">
 
-                            <? if ( !isset($_POST['user_send_ok']) && !isset($Error) ): ?>
+                            <? if ( !isset($_POST['user_send_ok']) && !isset($error) ): ?>
                                 <button name="user_send_ok" type="submit" class="mybtn_1 btn btn-primary">Ok</button>
                             <? else: ?>
                                 <div class="row g-2 justify-content-center">
@@ -29,12 +29,12 @@
 
                             </form>   
                                 
-                            <? if ( isset($kwest) ): ?>
+                            <? if ( isset($quest) ): ?>
                                 <div class="row">
                                 <div class="col-lg-4 mx-auto">
-                                <? if ( isset($Error) ): ?>
+                                <? if ( isset($error) ): ?>
                                     <div class="answer_extrasens alert alert-danger alert-dismissible fade show" role="alert">
-                                        <p><b><?= $Error; ?></b></p> 
+                                        <p><b><?= $error; ?></b></p> 
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -42,7 +42,7 @@
 
                                 <? else: ?> 
                                     <div class="answer_extrasens alert alert-success alert-dismissible fade show" role="alert">
-                                        <?php foreach($kwest as $extrasensName => $extrasensNumber): ?>
+                                        <?php foreach($quest as $extrasensName => $extrasensNumber): ?>
 
                                             <? if ( $extrasensName !== 'id' && $extrasensName !== 'userNumber' ): ?>
                                                 <p><b><?= $extrasensName; ?> : <?= $extrasensNumber; ?></b></p>   
@@ -105,23 +105,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($history_kwests as $kwest):?>
+                                <?php foreach($history_quests as $quest):?>
                                 <tr>
                                 
-                                <td><?= $kwest['id'];?></td>
-                                <td><?= $kwest['userNumber'];?></td>
+                                <td><?= $quest['id'];?></td>
+                                <td><?= $quest['userNumber'];?></td>
 
-                                <td><?= $kwest['Extrasens_1'];?></td>
-                                <td><?= $kwest['Extrasens_2'];?></td>
-                                <td><?= $kwest['Extrasens_3'];?></td>
-                                <? if ( $kwest['Extrasens_4'] ): ?>
-                                <td><?= $kwest['Extrasens_4'];?></td>
+                                <td><?= $quest['Extrasens_1'];?></td>
+                                <td><?= $quest['Extrasens_2'];?></td>
+                                <td><?= $quest['Extrasens_3'];?></td>
+                                <? if ( $quest['Extrasens_4'] ): ?>
+                                <td><?= $quest['Extrasens_4'];?></td>
                                 <? endif; ?>
-                                <? if ( $kwest['Extrasens_5'] ): ?>
-                                <td><?= $kwest['Extrasens_5'];?></td>
+                                <? if ( $quest['Extrasens_5'] ): ?>
+                                <td><?= $quest['Extrasens_5'];?></td>
                                 <? endif; ?>
-                                <? if ( $kwest['Extrasens_6'] ): ?>
-                                <td><?= $kwest['Extrasens_6'];?></td>
+                                <? if ( $quest['Extrasens_6'] ): ?>
+                                <td><?= $quest['Extrasens_6'];?></td>
                                 <? endif; ?>
 
 

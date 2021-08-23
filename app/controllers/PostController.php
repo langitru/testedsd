@@ -4,6 +4,7 @@ namespace Controllers;
 
 
 use Components\Validate;
+use Components\Extrasens;
 use Models\Posts;
 use League\Plates\Engine;
 
@@ -23,7 +24,7 @@ class PostController
     {
         if (isset($_POST['user_send_ok']))
         {
-            Posts::saveKwest1step();
+            Posts::saveQuest1step();
         }
 
 
@@ -32,29 +33,26 @@ class PostController
             if ( Validate::sendUserNumber($_POST) )
             {
 
-                if (isset($_SESSION['kwest'])){
-                    Posts::saveKwest3step();
+                if (isset($_SESSION['quest'])){
+                    Posts::saveQuest3step();
                 }
                 
-                if ($_SESSION['kwest'] != NULL)
+                if ($_SESSION['quest'] != NULL)
                 {
-                    Posts::saveKwestHistory();
+                    Posts::saveQuestHistory();
                 }
             } 
             else 
             {
-                $_SESSION['Error'] = 'Ошибка! Введите 2-х значное число';
+                $_SESSION['error'] = 'Ошибка! Введите 2-х значное число';
             }
         }
 
 
         Posts::sessionDestroy();
         
-        // $data = [];
-
         $data = $_SESSION;
 
-        // dd($data);
-        echo $this->views->render('index2.post', $data );
+        echo $this->views->render('index.post', $data );
     }
 }

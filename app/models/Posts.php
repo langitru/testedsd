@@ -5,31 +5,31 @@ use Components\Extrasens;
 
 class Posts
 {
-    public static function saveKwest1step()
+    public static function saveQuest1step()
     {
-        if(!isset($_SESSION['kwest']))
+        if(!isset($_SESSION['quest']))
         {
             $_SESSION['iteration'] += 1;
     
-            $_SESSION['kwest']['id'] += $_SESSION['iteration'];
-            $_SESSION['kwest']['userNumber'] = NULL;
+            $_SESSION['quest']['id'] += $_SESSION['iteration'];
+            $_SESSION['quest']['userNumber'] = NULL;
 
             Extrasens::askExrasens();
         }
     }
 
 
-    public static function saveKwest2step($ext)
+    public static function saveQuest2step($ext)
     {
-        $_SESSION['kwest'][$ext->name] = $ext->sayUserNumber();
+        $_SESSION['quest'][$ext->name] = $ext->sayUserNumber();
     }
 
 
-    public static function saveKwest3step()
+    public static function saveQuest3step()
     {
-        foreach( $_SESSION['kwest'] as $extName => $extNum )
+        foreach( $_SESSION['quest'] as $extName => $extNum )
         {
-            $_SESSION['kwest']['userNumber'] = $_POST['user_number'];
+            $_SESSION['quest']['userNumber'] = $_POST['user_number'];
     
             if ($extName == 'id' || $extName == 'userNumber')
             {
@@ -49,10 +49,10 @@ class Posts
     }
 
     
-    public static function saveKwestHistory()
+    public static function saveQuestHistory()
     {
-        $_SESSION['history_kwests'][$_SESSION['iteration']] = $_SESSION['kwest'];
-        unset($_SESSION['kwest']);
+        $_SESSION['history_quests'][$_SESSION['iteration']] = $_SESSION['quest'];
+        unset($_SESSION['quest']);
     }
 
 
