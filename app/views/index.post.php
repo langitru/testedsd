@@ -5,13 +5,14 @@
                     <div class="col-lg-8 col-md-8 mx-auto">
                         <h1 class="fw-light">Общество Web экстрасенсов</h1>
                         <p class="lead text-muted">Web экстрасенсы умеют читать ваши мысли. <br>Хотите проверить? <br>Загадайте двузначное число и нажмите кнопку.</p>
-
+                        
+                        <?= $Error ?>
                         
                         <div class="form">
                         
                             <form action="/" method="post">
 
-                            <? if ( !isset($_POST['user_send_ok']) && !isset($error) ): ?>
+                            <? if ( ! isset($_POST['user_send_ok']) && ! isset($Error) ): ?>
                                 <button name="user_send_ok" type="submit" class="mybtn_1 btn btn-primary">Ok</button>
                             <? else: ?>
                                 <div class="row g-2 justify-content-center">
@@ -29,12 +30,12 @@
 
                             </form>   
                                 
-                            <? if ( isset($quest) ): ?>
+                            <? if ( isset($Quest) ): ?>
                                 <div class="row">
                                 <div class="col-lg-4 mx-auto">
-                                <? if ( isset($error) ): ?>
+                                <? if ( isset($Error) ): ?>
                                     <div class="answer_extrasens alert alert-danger alert-dismissible fade show" role="alert">
-                                        <p><b><?= $error; ?></b></p> 
+                                        <p><b><?= $Error; ?></b></p> 
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -42,7 +43,7 @@
 
                                 <? else: ?> 
                                     <div class="answer_extrasens alert alert-success alert-dismissible fade show" role="alert">
-                                        <?php foreach($quest as $extrasensName => $extrasensNumber): ?>
+                                        <?php foreach($Quest as $extrasensName => $extrasensNumber): ?>
 
                                             <? if ( $extrasensName !== 'id' && $extrasensName !== 'userNumber' ): ?>
                                                 <p><b><?= $extrasensName; ?> : <?= $extrasensNumber; ?></b></p>   
@@ -68,7 +69,7 @@
 
             <section class="py-5 text-center container">
                 <div class="row py-lg-5">
-                <? if ( isset($veracity) ): ?>
+                <? if ( isset($Veracity) ): ?>
                     <div class="col-lg-5">
                         <table class="table">
                             <thead class="thead-dark">
@@ -78,7 +79,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($veracity as $extrasensName => $extrasensVeracity ):?>
+                                <?php foreach($Veracity as $extrasensName => $extrasensVeracity ):?>
                                     
                                 <tr>
                                     <td><?= $extrasensName;?></td>
@@ -105,7 +106,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($history_quests as $quest):?>
+                                <?php foreach($History as $quest):?>
                                 <tr>
                                 
                                 <td><?= $quest['id'];?></td>

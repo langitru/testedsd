@@ -8,6 +8,7 @@ use Models\Posts;
 class Extrasens
 {
     public $name;
+    public $veracity;
 
 
     public function __construct($id)
@@ -34,14 +35,16 @@ class Extrasens
     }
 
 
-    public static function askExrasens() 
+    public static function askExrasens($data) 
     {
         $amountExtrasens = rand(2, 6);
         for ($i = 1; $i <=  $amountExtrasens; $i++)        
         {
-            $ext = new Extrasens($i);
+            // $ext = new Extrasens($i);
+            // Posts::saveQuest2step($ext);
+
+            Posts::QuestStep_2($data, new Extrasens($i) );
             
-            Posts::saveQuest2step($ext);
         }
     }
 }
