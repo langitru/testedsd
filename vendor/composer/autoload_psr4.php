@@ -6,8 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
+    'PhpDocReader\\' => array($vendorDir . '/php-di/phpdoc-reader/src/PhpDocReader'),
+    'Opis\\Closure\\' => array($vendorDir . '/opis/closure/src'),
     'Models\\' => array($baseDir . '/app/models'),
     'League\\Plates\\' => array($vendorDir . '/league/plates/src'),
+    'Invoker\\' => array($vendorDir . '/php-di/invoker/src'),
+    'FastRoute\\' => array($vendorDir . '/nikic/fast-route/src'),
+    'DI\\' => array($vendorDir . '/php-di/php-di/src'),
     'Controllers\\' => array($baseDir . '/app/controllers'),
     'Config\\' => array($baseDir . '/config'),
     'Components\\' => array($baseDir . '/app/components'),
