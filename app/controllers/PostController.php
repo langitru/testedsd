@@ -4,13 +4,11 @@ namespace Controllers;
 
 
 use Components\Validate;
-use Components\Extrasens;
-use Components\QueryFactory;
 
-use Models\Posts;
 use Models\DataBase;
+// use Models\Psychic;
+use Models\Game;
 
-// use Models\DataBaseSession;
 use League\Plates\Engine;
 
 
@@ -29,84 +27,44 @@ class PostController extends MainController
 	}
 
 
-    public function indexOld()
-    {
-        if (isset($_POST['user_send_ok']))
-        {
-            Posts::saveQuest1step();
-        }
-
-
-        if ( isset($_POST['user_send_number']) )
-        {
-            if ( Validate::sendUserNumber($_POST) )
-            {
-
-                if (isset($_SESSION['quest'])){
-                    Posts::saveQuest3step();
-                }
-                
-                if ($_SESSION['quest'] != NULL)
-                {
-                    Posts::saveQuestHistory();
-                }
-            } 
-            else 
-            {
-                $_SESSION['error'] = 'Ошибка! Введите 2-х значное число';
-            }
-        }
-
-
-        Posts::sessionDestroy();
-        
-        $data = $_SESSION;
-
-        echo $this->views->render('index.post', $data );
-    }
-
-
     public function index()
     {
-        // Posts::sessionDestroy(true);
-        
-        $data = $this->db->get();
+        $this->db->sessionDestroy();
 
-        if (isset($_POST['user_send_ok']))
+        $game = $this->db->load();
+
+        if ( $game == NULL )
         {
-            $data = Posts::QuestStep_1($data);
-            $this->db->insert($data);
+            $game = new Game(4);
+
+            $this->db->save($game);
+        }
+
+
+        if ( isset($_POST['user_send_ok']) )
+        {
+            $game->StartRound();
+
+            $this->db->save($game);
+            
         }
 
 
         if ( isset($_POST['user_send_number']) )
         {
-            if ( Validate::sendUserNumber($_POST) )
+            if ( Validate::sendUserNumber( $_POST, $game ) )
             {
-                // posts->Quest
-
-                if (isset($data['Quest'])){
-                    $data = Posts::QuestStep_3($data);
-                    $this->db->insert($data);
-                }
-                
-                if ( $data['Quest'] != NULL )
-                {
-                    $data = Posts::QuestHistory($data);
-                    $this->db->insert($data);
-                }
-            } 
-            else 
+                $game->PushUserNumber($_POST['user_number']);
+                $this->db->save($game);
+            }
+            else
             {
-                $data['Error'] = 'Ошибка! Введите 2-х значное число';
+                $game->error = 'Ошибка! Введите 2-х значное число';
+                $this->db->save($game);
             }
         }
 
 
-        Posts::sessionDestroy();
-        
-        // 
-
-        echo $this->views->render('index.post', $data );
+        echo $this->views->render('index.post', ['game' => $game] );
     }
 }

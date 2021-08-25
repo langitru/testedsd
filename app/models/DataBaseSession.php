@@ -6,34 +6,34 @@ namespace Models;
 interface DataBaseInterface 
 {
     // public function insert($tableName, $data);
-    public function insert($data);
-    public function get();
+    public function save($data);
+    public function load();
 
     
 }
 
 class DataBaseSession implements DataBaseInterface
 {
-    // private $db;
-
-    public function insert($data)
+    public function save( $game )
     {
-
-        // $_SESSION['db'] = $data;
-        $_SESSION = $data;
-        // $_SESSION[$tableName][] = [
-        //     // 'id' => $data['id'],
-        //     'name' => $data['name'],
-        //     'veracity' => $data['veracity'],
-        // ];
-
-        // $this->db = $_SESSION;
+        $_SESSION['game'] = serialize( $game );
     }
 
-    public function get()
+
+    public function load()
     {
+        return unserialize( $_SESSION['game'] );
+    }
+
+
+    public function sessionDestroy($destroy = false)
+    {
+        if ( isset($_POST['ses_detroy']) || $destroy === true ){
+            session_destroy();
+            header('Location: /');
+        }
         
-        return $_SESSION;
-        // return $_SESSION['db'];
     }
+
+
 }

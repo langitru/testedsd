@@ -6,13 +6,11 @@
                         <h1 class="fw-light">Общество Web экстрасенсов</h1>
                         <p class="lead text-muted">Web экстрасенсы умеют читать ваши мысли. <br>Хотите проверить? <br>Загадайте двузначное число и нажмите кнопку.</p>
                         
-                        <?= $Error ?>
-                        
                         <div class="form">
                         
                             <form action="/" method="post">
 
-                            <? if ( ! isset($_POST['user_send_ok']) && ! isset($Error) ): ?>
+                            <? if ( ! isset($_POST['user_send_ok']) && ! isset($game->error) ): ?>
                                 <button name="user_send_ok" type="submit" class="mybtn_1 btn btn-primary">Ok</button>
                             <? else: ?>
                                 <div class="row g-2 justify-content-center">
@@ -30,24 +28,23 @@
 
                             </form>   
                                 
-                            <? if ( isset($Quest) ): ?>
-                                <div class="row">
+                            
+                            <div class="row">
                                 <div class="col-lg-4 mx-auto">
-                                <? if ( isset($Error) ): ?>
+                                <? if ( isset($game->error) ): ?>
                                     <div class="answer_extrasens alert alert-danger alert-dismissible fade show" role="alert">
-                                        <p><b><?= $Error; ?></b></p> 
+                                        <p><b><?= $game->DisplayError() ?></b></p> 
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
 
-                                <? else: ?> 
+                                <? elseif ( $game->GetCurrentRound() != 0 && $game->GetCurrentStep() != 0 ) : ?> 
                                     <div class="answer_extrasens alert alert-success alert-dismissible fade show" role="alert">
-                                        <?php foreach($Quest as $extrasensName => $extrasensNumber): ?>
-
-                                            <? if ( $extrasensName !== 'id' && $extrasensName !== 'userNumber' ): ?>
-                                                <p><b><?= $extrasensName; ?> : <?= $extrasensNumber; ?></b></p>   
-                                            <? endif;?>
+                                    
+                                        <?php foreach($game->GetPsychics() as $psychic): ?>
+                                            
+                                            <p><b><?= $psychic->GetName() ?> : <?= $psychic->GetCurrentGuess() ?></b></p>   
                                         
                                         <?php endforeach;?>
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -57,8 +54,7 @@
                                 <? endif;?>
                                 
                                 </div>
-                                </div>
-                            <? endif;?>
+                            </div>
                                        
                         </div>
 
@@ -69,7 +65,7 @@
 
             <section class="py-5 text-center container">
                 <div class="row py-lg-5">
-                <? if ( isset($Veracity) ): ?>
+                <? if ( $game->GetCurrentRound() > 0 ): ?>
                     <div class="col-lg-5">
                         <table class="table">
                             <thead class="thead-dark">
@@ -79,12 +75,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($Veracity as $extrasensName => $extrasensVeracity ):?>
+                                <?php foreach($game->GetPsychics() as $psychic ):?>
                                     
                                 <tr>
-                                    <td><?= $extrasensName;?></td>
+                                    <td><?= $psychic->GetName() ?></td>
                                 
-                                    <td><?= $extrasensVeracity;?></td>
+                                    <td><?= $psychic->GetVeracity() ?></td>
                                 </tr>
                                 <?php endforeach;?>
 
@@ -101,31 +97,19 @@
                                 <th scope="col">Ext_2</th>
                                 <th scope="col">Ext_3</th>
                                 <th scope="col">Ext_4</th>
-                                <th scope="col">Ext_5</th>
-                                <th scope="col">Ext_6</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($History as $quest):?>
+                                <?php foreach($game->GetRounds() as $round): ?>
                                 <tr>
+                               
+                                <td><?= $round->GetCurrentRound() ?></td>
+                                <td><?= $round->GetUserNumber() ?></td>
                                 
-                                <td><?= $quest['id'];?></td>
-                                <td><?= $quest['userNumber'];?></td>
-
-                                <td><?= $quest['Extrasens_1'];?></td>
-                                <td><?= $quest['Extrasens_2'];?></td>
-                                <td><?= $quest['Extrasens_3'];?></td>
-                                <? if ( $quest['Extrasens_4'] ): ?>
-                                <td><?= $quest['Extrasens_4'];?></td>
-                                <? endif; ?>
-                                <? if ( $quest['Extrasens_5'] ): ?>
-                                <td><?= $quest['Extrasens_5'];?></td>
-                                <? endif; ?>
-                                <? if ( $quest['Extrasens_6'] ): ?>
-                                <td><?= $quest['Extrasens_6'];?></td>
-                                <? endif; ?>
-
-
+                                    <?php foreach($round->GetPsychics() as $psychicCurrentGuess): ?>
+                                        <td><?= $psychicCurrentGuess ?></td>
+                                    <?php endforeach;?>
+                                
                                 </tr>
                                 <?php endforeach;?>
 

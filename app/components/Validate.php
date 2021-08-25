@@ -5,30 +5,21 @@ namespace Components;
 
 class Validate
 {
-    static public function sendUserNumber($post)
+    static public function sendUserNumber($post, $game)
     {
-        if ($post['user_number'] >= 10 && $post['user_number'] <= 99)
+        
+        $userNumber = $post['user_number'];
+
+        // dd($userNumber);
+        if ($userNumber >= 10 && $userNumber <= 99)
         {
-            
-            
-            unset($_SESSION['Error']);
-            return $post['user_number'];
-
-
+            $game->error = NULL;
+            return $userNumber;
         }
         else 
         {
             
-            //dd(gettype($post['user_number']));
-            
-            // dd( $post['user_number']);
-
-
             return false;
         }
-
     }
-
-
-
 }
