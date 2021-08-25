@@ -9,23 +9,14 @@ class Round
     private $userNumber;
     private $psychics = [];
     
-    // public 
-
     public function SaveRound($id, $number, $psychics )
     {
         $this->currentRound = $id;
         $this->userNumber = $number;
         foreach ($psychics as $psychic) 
         {
-            // $string_ = [ $psychic->GetName() => $psychic->GetCurrentGuess() ];
-            
-            // array_push( $this->psychics, [ $psychic->GetName() => $psychic->GetCurrentGuess() ] );
             array_push( $this->psychics, $psychic->GetCurrentGuess() );
-            
         }
-        // dd($this->psychics);
-        // $this->psychics = $psychics;
-
     }
 
 

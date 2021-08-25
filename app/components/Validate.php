@@ -10,7 +10,6 @@ class Validate
         
         $userNumber = $post['user_number'];
 
-        // dd($userNumber);
         if ($userNumber >= 10 && $userNumber <= 99)
         {
             $game->error = NULL;

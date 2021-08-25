@@ -88,18 +88,13 @@ class Game
 
         array_push( $this->rounds, $round );
 
-        // d($this->rounds);
-
         foreach ($this->psychics as $psychic)
         {
             $psychic->ResetCurrentGuess();
         }
 
-        // d($this->rounds);
-
         $this->currentRound++;
         $this->currentStepGame = 0;
-        // $this->psychics
     }
 
 

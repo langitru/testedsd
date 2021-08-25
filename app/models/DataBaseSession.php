@@ -1,11 +1,9 @@
 <?php
 namespace Models;
 
-// use Models\DataBase;
 
 interface DataBaseInterface 
 {
-    // public function insert($tableName, $data);
     public function save($data);
     public function load();
 
