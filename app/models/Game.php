@@ -10,7 +10,7 @@ class Game
 {
     private $psychics = [];
     private $rounds = [];
-    private $currentRound = 0;
+    private $currentRound = 1;
     private $currentStepGame = 0;
 
     public $error;
@@ -59,7 +59,6 @@ class Game
             $psychic->DoGuess();
         }
 
-        $this->currentRound++;
         $this->currentStepGame++;
     }
 
