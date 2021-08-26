@@ -10,15 +10,15 @@ class Psychic
     private $currentGuess = 0;
 
 
-    public function __construct( $id )
+    public function __construct($id)
     {
-        $this->name = $this->GenerateNamePsychic( $id );
+        $this->name = $this->GenerateNamePsychic($id);
     }
 
 
     public function GetName()
     {
-        return $this->name;        
+        return $this->name;
     }
 
 
@@ -40,28 +40,24 @@ class Psychic
     }
 
 
-    public function GenerateNamePsychic( $id )
+    public function GenerateNamePsychic($id)
     {
-        return 'Extrasens_'.$id;
+        return 'Extrasens_' . $id;
     }
 
 
-    public function DoGuess() 
+    public function DoGuess()
     {
-        $this->currentGuess = rand( 10, 99 );
+        $this->currentGuess = rand(10, 99);
     }
 
 
-    public function CheckUserNumber( $number )
+    public function CheckUserNumber($number)
     {
-        if ($number == $this->currentGuess)
-        {
+        if ($number == $this->currentGuess) {
             $this->veracity++;
-        }
-        else
-        {
+        } else {
             $this->veracity--;
         }
-
     }
 }

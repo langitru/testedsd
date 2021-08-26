@@ -1,4 +1,5 @@
 <?php
+
 namespace Controllers;
 
 
@@ -19,10 +20,10 @@ class PostController extends MainController
 
 
     function __construct()
-	{
-		$this->views = new Engine('../app/views');
+    {
+        $this->views = new Engine('../app/views');
         $this->db = DataBase::CreateDB();
-	}
+    }
 
 
     public function Index()
@@ -31,58 +32,51 @@ class PostController extends MainController
 
         $game = $this->db->load();
 
-        if ( $game == NULL )
-        {
+        if ($game == null) {
             $game = new Game(4);
 
             $this->db->save($game);
         }
 
 
-        if ( isset($_POST['user_send_ok']) )
-        {
+        if (isset($_POST['user_send_ok'])) {
             $game->StartRound();
 
             $this->db->save($game);
         }
 
 
-        echo $this->views->render('index.post', ['game' => $game] );
+        echo $this->views->render('index.post', ['game' => $game]);
     }
 
 
     public function Number()
-	{
-        $this->db->sessionDestroy();
-
+    {
         $game = $this->db->load();
 
         $game->StartRound();
 
         $this->db->save($game);
 
-        if ( isset($_POST['user_send_number']) )
-        {
-            if ( Validate::sendUserNumber( $_POST, $game ) )
-            {
+        if (isset($_POST['user_send_number'])) {
+            if (Validate::sendUserNumber($_POST, $game)) {
                 $game->PushUserNumber($_POST['user_number']);
                 $this->db->save($game);
 
                 header('Location: /');
-            }
-            else
-            {
+            } else {
                 $game->error = 'Ошибка! Введите 2-х значное число';
                 $this->db->save($game);
             }
         }
-		
-		echo  $this->views->render('userNumber.post',  ['game' => $game] );
-	}
+
+        echo  $this->views->render('userNumber.post',  ['game' => $game]);
+    }
 
 
-	public static function Error($numberError)
-	{
-		echo  $this->views->render($numberError.'.post');
-	}
+    public static function Error($numberError)
+    {
+        $views = new Engine('../app/views');
+        echo  $views->render($numberError . '.post');
+    }
 }

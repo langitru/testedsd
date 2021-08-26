@@ -1,4 +1,5 @@
 <?php
+
 namespace Models;
 
 use Models\Psychic;
@@ -13,14 +14,11 @@ class Game
     private $currentStepGame = 0;
 
     public $error;
-    
-
 
 
     public function __construct($amountPsychics)
     {
-        for ( $i = 1; $i <= $amountPsychics; $i++ )
-        {
+        for ($i = 1; $i <= $amountPsychics; $i++) {
             $psychic = new Psychic($i);
             array_push($this->psychics, $psychic);
         }
@@ -49,47 +47,41 @@ class Game
         return $this->currentStepGame;
     }
 
-    
+
     public function StartRound()
     {
-        
-        if ( $this->currentStepGame != 0 )
-        {
+
+        if ($this->currentStepGame != 0) {
             return;
         }
-        
-        foreach ( $this->psychics as $psychic )
-        {
+
+        foreach ($this->psychics as $psychic) {
             $psychic->DoGuess();
         }
-        
+
         $this->currentRound++;
         $this->currentStepGame++;
-
-
     }
 
 
     public function PushUserNumber($number)
     {
         $round = new Round;
-        
 
-        foreach ($this->psychics as $psychic)
-        {
+
+        foreach ($this->psychics as $psychic) {
             $psychic->CheckUserNumber($number);
         }
-        
+
         $round->SaveRound(
             $this->currentRound,
             $number,
             $this->psychics
         );
 
-        array_push( $this->rounds, $round );
+        array_push($this->rounds, $round);
 
-        foreach ($this->psychics as $psychic)
-        {
+        foreach ($this->psychics as $psychic) {
             $psychic->ResetCurrentGuess();
         }
 
@@ -98,16 +90,8 @@ class Game
     }
 
 
-
-
-
     public function DisplayError()
     {
         return $this->error;
     }
-
-
-
-
-
 }

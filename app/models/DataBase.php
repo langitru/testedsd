@@ -1,4 +1,5 @@
 <?php
+
 namespace Models;
 
 use Models\DataBaseSession;

@@ -1,4 +1,3 @@
-  
 <?php $this->layout('layout', ['title' => 'Error 405']) ?>
 
 <div class="col-8 offset-2">
